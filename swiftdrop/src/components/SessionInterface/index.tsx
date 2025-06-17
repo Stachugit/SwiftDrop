@@ -62,22 +62,32 @@ const SessionInterface: React.FC<SessionInterfaceProps> = ({
   const secondsLeft = Math.floor((timeLeft % 60000) / 1000);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gray-900">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b">
+      <div className="dark-card border-b border-gray-700">
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-xl font-bold text-gray-900">Session {session.code}</h1>
-              <p className="text-sm text-gray-500">
-                {connectedDevices.length} device{connectedDevices.length !== 1 ? 's' : ''} connected • 
-                Expires in {minutesLeft}:{secondsLeft.toString().padStart(2, '0')}
-              </p>
+            <div className="flex items-center space-x-4">
+              <img 
+                src="/logo.png" 
+                alt="SwiftDrop Logo" 
+                className="w-8 h-8"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                }}
+              />
+              <div>
+                <h1 className="text-xl font-bold text-white">Session {session.code}</h1>
+                <p className="text-sm text-gray-400">
+                  {connectedDevices.length} device{connectedDevices.length !== 1 ? 's' : ''} connected • 
+                  Expires in <span className="text-green-400">{minutesLeft}:{secondsLeft.toString().padStart(2, '0')}</span>
+                </p>
+              </div>
             </div>
             
             <button
               onClick={onBackToMenu}
-              className="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200"
+              className="bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200"
             >
               End Session
             </button>
@@ -87,10 +97,10 @@ const SessionInterface: React.FC<SessionInterfaceProps> = ({
 
       {/* Connection Status */}
       <div className="max-w-4xl mx-auto px-4 py-4">
-        <div className="bg-white rounded-lg shadow-sm p-4 mb-6">
+        <div className="dark-card rounded-lg p-4 mb-6">
           <div className="flex items-center space-x-3">
             <div className={`w-3 h-3 rounded-full ${connectedDevices.length > 1 ? 'bg-green-500' : 'bg-yellow-500'}`}></div>
-            <span className="text-sm font-medium text-gray-900">
+            <span className="text-sm font-medium text-white">
               {connectedDevices.length > 1 
                 ? 'Connected and ready to transfer files' 
                 : 'Waiting for another device to join...'}
@@ -101,25 +111,25 @@ const SessionInterface: React.FC<SessionInterfaceProps> = ({
 
       {/* Tabs */}
       <div className="max-w-4xl mx-auto px-4">
-        <div className="bg-white rounded-lg shadow-sm">
-          <div className="border-b border-gray-200">
+        <div className="dark-card rounded-lg">
+          <div className="border-b border-gray-700">
             <nav className="flex space-x-8 px-6">
               <button
                 onClick={() => setActiveTab('send')}
-                className={`py-4 px-1 border-b-2 font-medium text-sm ${
+                className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === 'send'
-                    ? 'border-blue-500 text-blue-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700'
+                    ? 'border-green-500 text-green-400'
+                    : 'border-transparent text-gray-400 hover:text-gray-300'
                 }`}
               >
                 Send Files ({filesToSend.length})
               </button>
               <button
                 onClick={() => setActiveTab('receive')}
-                className={`py-4 px-1 border-b-2 font-medium text-sm ${
+                className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
                   activeTab === 'receive'
-                    ? 'border-blue-500 text-blue-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700'
+                    ? 'border-green-500 text-green-400'
+                    : 'border-transparent text-gray-400 hover:text-gray-300'
                 }`}
               >
                 Received Files ({receivedFiles.length})

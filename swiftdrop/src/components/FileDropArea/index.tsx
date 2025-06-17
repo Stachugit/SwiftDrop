@@ -62,7 +62,7 @@ const FileDropArea: React.FC<FileDropAreaProps> = ({ onFilesSelected, files }) =
       case 'completed': return 'bg-green-500';
       case 'uploading': return 'bg-blue-500';
       case 'failed': return 'bg-red-500';
-      default: return 'bg-gray-300';
+      default: return 'bg-gray-600';
     }
   };
 
@@ -72,8 +72,8 @@ const FileDropArea: React.FC<FileDropAreaProps> = ({ onFilesSelected, files }) =
       <div
         className={`border-2 border-dashed rounded-xl p-8 text-center transition-all duration-200 ${
           isDragOver 
-            ? 'border-blue-500 bg-blue-50' 
-            : 'border-gray-300 bg-gray-50 hover:border-gray-400'
+            ? 'border-green-400 bg-gray-800' 
+            : 'border-gray-600 bg-gray-800 hover:border-gray-500'
         }`}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
@@ -81,7 +81,7 @@ const FileDropArea: React.FC<FileDropAreaProps> = ({ onFilesSelected, files }) =
       >
         <div className="flex flex-col items-center space-y-4">
           <svg 
-            className={`w-12 h-12 ${isDragOver ? 'text-blue-500' : 'text-gray-400'}`}
+            className={`w-12 h-12 ${isDragOver ? 'text-green-400' : 'text-gray-400'}`}
             fill="none" 
             stroke="currentColor" 
             viewBox="0 0 24 24"
@@ -95,17 +95,17 @@ const FileDropArea: React.FC<FileDropAreaProps> = ({ onFilesSelected, files }) =
           </svg>
           
           <div>
-            <h3 className="text-lg font-semibold text-gray-900">
+            <h3 className="text-lg font-semibold text-white">
               Drop files here or click to select
             </h3>
-            <p className="text-gray-500 mt-1">
+            <p className="text-gray-400 mt-1">
               Support for any file type
             </p>
           </div>
 
           <button
             onClick={() => fileInputRef.current?.click()}
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition-colors duration-200"
+            className="bg-green-500 hover:bg-green-400 text-black font-semibold py-2 px-6 rounded-lg transition-colors duration-200"
           >
             Choose Files
           </button>
@@ -123,16 +123,16 @@ const FileDropArea: React.FC<FileDropAreaProps> = ({ onFilesSelected, files }) =
       {/* File List */}
       {files.length > 0 && (
         <div className="mt-6 space-y-3">
-          <h4 className="font-semibold text-gray-900">Files to Send ({files.length})</h4>
+          <h4 className="font-semibold text-white">Files to Send ({files.length})</h4>
           
           {files.map((file) => (
-            <div key={file.id} className="bg-white rounded-lg border border-gray-200 p-4">
+            <div key={file.id} className="dark-card rounded-lg p-4">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900 truncate">
+                  <p className="text-sm font-medium text-white truncate">
                     {file.name}
                   </p>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-gray-400">
                     {formatFileSize(file.size)} • {file.status}
                   </p>
                 </div>
@@ -152,7 +152,7 @@ const FileDropArea: React.FC<FileDropAreaProps> = ({ onFilesSelected, files }) =
               </div>
 
               {/* Progress Bar */}
-              <div className="w-full bg-gray-200 rounded-full h-2">
+              <div className="w-full bg-gray-700 rounded-full h-2">
                 <div 
                   className={`h-2 rounded-full transition-all duration-300 ${getProgressColor(file.status)}`}
                   style={{ width: `${file.progress}%` }}

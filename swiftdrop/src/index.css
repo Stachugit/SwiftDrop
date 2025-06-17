@@ -9,5 +9,62 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f8fafc;
+  background-color: #1a1a1a;
+  min-height: 100vh;
+}
+
+/* Custom light green colors */
+.bg-light-green {
+  background-color: #4ade80;
+}
+
+.text-light-green {
+  color: #4ade80;
+}
+
+.border-light-green {
+  border-color: #4ade80;
+}
+
+.hover\:bg-light-green:hover {
+  background-color: #4ade80;
+}
+
+.hover\:text-light-green:hover {
+  color: #4ade80;
+}
+
+/* Dark theme components */
+.dark-card {
+  background-color: #2d2d2d;
+  border: 1px solid #404040;
+}
+
+.dark-input {
+  background-color: #3d3d3d;
+  border: 1px solid #525252;
+  color: white;
+}
+
+.dark-input:focus {
+  border-color: #4ade80;
+  box-shadow: 0 0 0 1px #4ade80;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #2d2d2d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4ade80;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #22c55e;
 }
