@@ -1,24 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import SessionManager from './components/SessionManager';
+import QRDisplay from './components/QRDisplay';
+import { Session } from './types';
 
 function App() {
+  const [currentSession, setCurrentSession] = useState<Session | null>(null);
+  const [view, setView] = useState<'menu' | 'session'>('menu');
+
+  const handleSessionCreated = (session: Session) => {
+    setCurrentSession(session);
+    setView('session');
+  };
+
+  const handleJoinSession = (sessionCode: string) => {
+    // For now, just simulate joining
+    console.log('Joining session:', sessionCode);
+    // TODO: Implement actual join logic
+  };
+
+  const handleBackToMenu = () => {
+    setCurrentSession(null);
+    setView('menu');
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {view === 'menu' ? (
+        <SessionManager 
+          onSessionCreated={handleSessionCreated}
+          onJoinSession={handleJoinSession}
+        />
+      ) : currentSession ? (
+        <QRDisplay 
+          session={currentSession}
+          onBackToMenu={handleBackToMenu}
+        />
+      ) : null}
     </div>
   );
 }
